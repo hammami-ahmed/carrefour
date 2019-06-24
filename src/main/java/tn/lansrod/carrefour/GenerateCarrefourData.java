@@ -10,8 +10,9 @@ import tn.lansrod.carrefour.utils.RandomUtils;
 
 public class GenerateCarrefourData {
 	public static final int MAXPRODUCEDBYSTORE = 20000;
+	public static final int MINTRANSACTIONLINE = 100000;
 	public static final int NB_STORE = 1200;
-	public static final String INPUTPATH = "/home/ahmed/carrefour/input/";
+	public static final String INPUTPATH = "/home/lansrod/carrefour/input/";
 	public static final List<String> INTERVALTRANSACTIONDATE = Arrays.asList("10/06/2019", "11/06/2019", "12/06/2019", "13/06/2019", "14/06/2019", "15/06/2019", "16/06/2019");
 	
 	// génération des données de 1200 magasin carrefour
@@ -25,7 +26,7 @@ public class GenerateCarrefourData {
 	    Map<Integer, String> listMagasinIDs = RandomUtils.generateMagasinIDs(NB_STORE);
     	// generer les données d'une semaines.
     	for (String date : INTERVALTRANSACTIONDATE) {
-			GenerateData.generate(date, INPUTPATH, NB_STORE, MAXPRODUCEDBYSTORE, listMagasinIDs);
+			GenerateData.generate(date, INPUTPATH, NB_STORE, MAXPRODUCEDBYSTORE, MINTRANSACTIONLINE, listMagasinIDs);
     	}
     	
     	Date end = new Date();

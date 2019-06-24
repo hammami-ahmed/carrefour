@@ -11,6 +11,8 @@ public class ProcessTransactionTopHundredQteByDay {
 	// fichier de transaction contient presque 3 million lignes
 	// 1er pt
 	// 9 sec
+	
+	// 1.199.669 lignes de transaction 5 sec
 	public static void main( String[] args ) {
 		// enter la date de transaction en question
 		if(args.length != 4) {

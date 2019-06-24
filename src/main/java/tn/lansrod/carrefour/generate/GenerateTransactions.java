@@ -11,7 +11,7 @@ import tn.lansrod.carrefour.utils.RandomUtils;
 
 public class GenerateTransactions {
 
-	public static void generate(Map<Integer, Map<String, Integer>> listMagasins, String outputDirectoryName, String date, String dateForName) {
+	public static void generate(Map<Integer, Map<String, Integer>> listMagasins, String outputDirectoryName, String date, String dateForName, int minTransactionLine) {
 		// initialisation de temps
 		int hour = 6;
 		int min = 0;
@@ -24,8 +24,8 @@ public class GenerateTransactions {
 		FileUtils.createFile(file);
 		// ouverture de fichier pour commencer l'ecriture
 		CSVWriter writer = FileUtils.openFile(fullPath);
-		
-		for(int k = 1; k <= 200000; k++) {
+
+		for(int k = 1; k <= minTransactionLine; k++) {
 			// repeter une transaction au maximum 5 fois minimum une seul fois
 			int nbTransaction = RandomUtils.getRandomWithMinMax(1, 5);
 			for(int l = 1; l <= nbTransaction; l++) {
