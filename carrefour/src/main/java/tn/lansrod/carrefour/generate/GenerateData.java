@@ -7,7 +7,7 @@ import tn.lansrod.carrefour.utils.DateUtils;
 import tn.lansrod.carrefour.utils.FileUtils;
 
 public class GenerateData {
-	public static void generate(String date, String inputPath, int nbStore, int maxProducedByStore, Map<Integer, String> listMagasinIDs) {
+	public static void generate(String date, String inputPath, int nbStore, int maxProducedByStore, int minTransactionLine, Map<Integer, String> listMagasinIDs) {
 		// la liste des IDs des magasins avec le nombre des produits dans chacune
 		Map<Integer, Map<String, Integer>> storeList = new HashMap<Integer, Map<String, Integer>>();
 		// changer la format de date en yyyyMMdd pour l'utiliser dans le nom
@@ -29,7 +29,7 @@ public class GenerateData {
 			GenerateMagasins.generate(magasinID, maxProducedByStore, dateForName, inputDirectoryName);
     	}
 		// generer le fichier de transaction de cette date
-		GenerateTransactions.generate(storeList, inputDirectoryName, date, dateForName);
+		GenerateTransactions.generate(storeList, inputDirectoryName, date, dateForName, minTransactionLine);
 	}
 	
 }
