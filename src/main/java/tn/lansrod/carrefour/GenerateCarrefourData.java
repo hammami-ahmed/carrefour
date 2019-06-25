@@ -9,7 +9,7 @@ import tn.lansrod.carrefour.utils.GenerateDataUtils;
 import tn.lansrod.carrefour.utils.RandomUtils;
 
 public class GenerateCarrefourData {
-	public static final int MINTRANSACTIONLINE = 100000;
+	public static final int MINTRANSACTIONLINE = 250000;
 	// génération des données de 1200 magasin carrefour
 	// chaque magasin contient 20000 produits
 	// et un fichier de transaction contenant environ 1.4 million lignes par jour
