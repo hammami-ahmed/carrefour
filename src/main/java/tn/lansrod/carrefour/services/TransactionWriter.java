@@ -12,9 +12,10 @@ import tn.lansrod.carrefour.utils.FileUtils;
 
 public class TransactionWriter {
 	
-	public static void write(Map<String, Map<String, Integer>> map, String dateToProcess, String outputDirectory, String endWith) {
-		String outputDirectoryName = outputDirectory + "/" + dateToProcess;
-	    FileUtils.createDirectory(outputDirectoryName);
+	public static void write(Map<String, Map<String, Integer>> map, String dateToProcess, String outputDirectory, String endWith, String task) {
+		String outputDirectoryName = outputDirectory + "/" + task + "/" + dateToProcess;
+		FileUtils.createDirectory(outputDirectory + "/" + task);
+		FileUtils.createDirectory(outputDirectoryName);
 	    for (Map.Entry<String, Map<String, Integer>> entry : map.entrySet()) {
 			String magasinID = entry.getKey();
 			Map<String, Integer> product = entry.getValue();
@@ -41,8 +42,9 @@ public class TransactionWriter {
 		}
 	}
 
-	public static void writeCA(Map<String, Map<String, Double>> mapCA, String dateToProcess, String outputDirectory, String addedToEnd) {
-		String outputDirectoryName = outputDirectory + "/" + dateToProcess;
+	public static void writeCA(Map<String, Map<String, Double>> mapCA, String dateToProcess, String outputDirectory, String addedToEnd, String task) {
+		String outputDirectoryName = outputDirectory + "/" + task + "/" + dateToProcess;
+		FileUtils.createDirectory(outputDirectory + "/" + task);
 	    FileUtils.createDirectory(outputDirectoryName);
 	    for (Map.Entry<String, Map<String, Double>> entry : mapCA.entrySet()) {
 			String magasinID = entry.getKey();
@@ -69,8 +71,9 @@ public class TransactionWriter {
 		}
 	}
 
-	public static void writeGlobal(Map<String, Integer> map, String dateToProcess, String outputDirectory, String endWith) {
-		String outputDirectoryName = outputDirectory + "/" + dateToProcess;
+	public static void writeGlobal(Map<String, Integer> map, String dateToProcess, String outputDirectory, String endWith, String task) {
+		String outputDirectoryName = outputDirectory + "/" + task + "/" + dateToProcess;
+		FileUtils.createDirectory(outputDirectory + "/" + task);
 	    FileUtils.createDirectory(outputDirectoryName);
 	    
 	    String fullPath = outputDirectoryName + "/top_100_ventes_GLOBAL_" + dateToProcess + endWith + ".csv";
@@ -86,8 +89,9 @@ public class TransactionWriter {
 	}
 
 	public static void writeCAGlobal(Map<String, Double> products, String dateToProcess,
-			String outputDirectory) {
-		String outputDirectoryName = outputDirectory + "/" + dateToProcess;
+			String outputDirectory, String task) {
+		String outputDirectoryName = outputDirectory + "/" + task + "/" + dateToProcess;
+		FileUtils.createDirectory(outputDirectory + "/" + task);
 	    FileUtils.createDirectory(outputDirectoryName);
 	    
 	    String fullPath = outputDirectoryName + "/top_100_ca_GLOBAL_" + dateToProcess + ".csv";
@@ -101,5 +105,5 @@ public class TransactionWriter {
 		}
 		FileUtils.closeFile(writer);
 	}
-	
+
 }

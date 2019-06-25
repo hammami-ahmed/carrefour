@@ -1,11 +1,6 @@
 package tn.lansrod.carrefour;
 
-import java.util.Date;
-import java.util.Map;
-
-import tn.lansrod.carrefour.services.TransactionReader;
-import tn.lansrod.carrefour.services.TransactionWriter;
-import tn.lansrod.carrefour.utils.ParamsUtils;;
+import tn.lansrod.carrefour.services.StartTask;;
 
 public class ProcessTransactionTopHundredQteByDay {
 	// fichier de transaction contient presque 1.4 million lignes
@@ -18,17 +13,7 @@ public class ProcessTransactionTopHundredQteByDay {
 			return;
 		}
 		else {
-			Date start = new Date();
-	    	System.out.println("Start processing at: " + start);
-	    	// preparation des parametres
-			ParamsUtils.initParams(args);
-			// lire le fichier de transaction et faire u groupe par magasin et par produit
-			Map<String, Map<String, Integer>> map = TransactionReader.read(ParamsUtils.tranctionFilePath, ParamsUtils.delimiter);
-			// ecriture de resultat dans le dossier destination
-			String endWith = "";
-			TransactionWriter.write(map, ParamsUtils.dateToProcess, ParamsUtils.outputDirectory, endWith);
-			Date end = new Date();
-	    	System.out.println("End processing at: " + end);
+			StartTask.taskOne(args);
 		}
 	}
 }

@@ -41,7 +41,8 @@ public class ProcessTransactionTopHundredChiffreAffaireByDayTest {
 		Map<String, Map<String, Integer>> stream = TransactionReader.read(transactionFilePath, DELIMITER);
 		Map<String, Map<String, Double>> streamCA = TransactionReader.convertReaderWithChiffreAffaire(stream, inputPath, DATE, DELIMITER);
 		String endWith = "";
-		TransactionWriter.writeCA(streamCA, DATE, outputPath, endWith);
+		String task = "Task_N°3";
+		TransactionWriter.writeCA(streamCA, DATE, outputPath, endWith, task);
     }
 	
 	public static void deleteDirectoryRecursion(Path path) throws IOException {
@@ -83,13 +84,13 @@ public class ProcessTransactionTopHundredChiffreAffaireByDayTest {
 	
 	@Test
     public void shouldGenerateOneOutputFiles() {
-		int count = new File(outputPath + "/20190610/").list().length;
+		int count = new File(outputPath + "/Task_N°3/20190610/").list().length;
 		assertEquals(count, 1);
 	}
 	
 	@Test
     public void shouldContainStoreLines() {
-		String filePath =  outputPath + "/20190610/top_100_ca_ventes-10f2f3e6-f728-41f3-b079-43b0aa758292-20190610.csv";
+		String filePath =  outputPath + "/Task_N°3/20190610/top_100_ca_ventes-10f2f3e6-f728-41f3-b079-43b0aa758292-20190610.csv";
 		long counttopventeLines = 0;
 		try {
 			counttopventeLines = Files.lines(Paths.get(filePath)).count();
@@ -101,7 +102,7 @@ public class ProcessTransactionTopHundredChiffreAffaireByDayTest {
 	
 	@Test
     public void shouldLinesCAEqualsResult() {
-		String filePath =  outputPath + "/20190610/top_100_ca_ventes-10f2f3e6-f728-41f3-b079-43b0aa758292-20190610.csv";
+		String filePath =  outputPath + "/Task_N°3/20190610/top_100_ca_ventes-10f2f3e6-f728-41f3-b079-43b0aa758292-20190610.csv";
 		try {
 			List<Double> list =  Files.lines(Paths.get(filePath), Charset.defaultCharset())
 								.map(line -> {

@@ -1,9 +1,9 @@
 Ce projet contien deux parties, une partie pour la génération des données et autre pour faire des traitements sur les données généré.
 
-- 1er partie (génération des données):
+#1er partie (génération des données):
 
-package: tn.lansrod.carrefour
-class : GenerateCarrefourData
+#package: tn.lansrod.carrefour
+#class : GenerateCarrefourData
 
 Cette class prend comme exemple les paramètres suivants: 10/06/2019 /home/pathto/input 1200 20000 ou:
 
@@ -14,12 +14,9 @@ Cette class prend comme exemple les paramètres suivants: 10/06/2019 /home/patht
 
 Les données final sont ecrite sous /home/pathto/input de la façon suivante:
 
-/home/pathto/input/20190610/ fichiers des ref et transaction
-/home/pathto/input/20190611/ fichiers des ref et transaction
-/home/pathto/input/20190612/ fichiers des ref et transaction
-/home/pathto/input/20190613/ fichiers des ref et transaction etc ...
+/home/pathto/input/20190610/ fichiers des ref et transaction etc ...
 
-- 2eme partie (traitement des données):
+#2eme partie (traitement des données):
 
 Cette partie est découpé en plusieur sous partie selon le task que vous souhaité exécuter
 chaque class ou chaque task prend comme exemple les paramètres suivants: 10/06/2019 | /home/pathto/input /home/pathto/output
@@ -29,15 +26,17 @@ chaque class ou chaque task prend comme exemple les paramètres suivants: 10/06/
 /home/pathto/input est le shemin vers l'emplacement des données 
 /home/pathto/output est le shemin ou vous souhaite ecrire votre resultat
 
-package: tn.lansrod.carrefour
-Task 1 class : ProcessTransactionTopHundredQteByDay
-Task 2 class : ProcessTransactionTopHundredQteGlobalByDay
-Task 3 class : ProcessTransactionTopHundredChiffreAffaireByDay
-Task 4 class : ProcessTransactionTopHundredChiffreAffaireGlobalByDay
-Task 5 class : ProcessTransactionTopHundredQteJ7
-Task 6 class : ProcessTransactionTopHundredQteGlobalJ7
-Task 7 class : ProcessTransactionTopHundredChiffreAffaireJ7
+#package: tn.lansrod.carrefour
+#Task 1 class : ProcessTransactionTopHundredQteByDay
+#Task 2 class : ProcessTransactionTopHundredQteGlobalByDay
+#Task 3 class : ProcessTransactionTopHundredChiffreAffaireByDay
+#Task 4 class : ProcessTransactionTopHundredChiffreAffaireGlobalByDay
+#Task 5 class : ProcessTransactionTopHundredQteJ7
+#Task 6 class : ProcessTransactionTopHundredQteGlobalJ7
+#Task 7 class : ProcessTransactionTopHundredChiffreAffaireJ7
+
+#StartTasksSequentially: une class qui lance tous les tasks sequentiellement
 
 Les données final sont écrite sous /home/pathto/output de la façon suivante
 
-/home/pathto/output/20190610/ fichiers des top_vent ...
+/home/pathto/output/Task number/20190610/ fichiers des top_vent ...

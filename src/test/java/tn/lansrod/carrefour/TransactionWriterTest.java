@@ -64,8 +64,9 @@ public class TransactionWriterTest {
 	@Test
     public void shouldWriteOutputFile() {
 		Map<String, Map<String, Integer>> stream = TransactionReader.read(transactionFilePath, DELIMITER);
-		TransactionWriter.write(stream, DATE, outputPath, "");
-		int count = new File(outputPath + "/" + DATE).list().length;
+		String task = "Task_N°3";
+		TransactionWriter.write(stream, DATE, outputPath, "", task);
+		int count = new File(outputPath + "/Task_N°3/" + DATE).list().length;
 		assertEquals(count, 1);
 	}
 }
