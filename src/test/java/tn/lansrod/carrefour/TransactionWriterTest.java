@@ -68,5 +68,4 @@ public class TransactionWriterTest {
 		int count = new File(outputPath + "/" + DATE).list().length;
 		assertEquals(count, 1);
 	}
-	
 }

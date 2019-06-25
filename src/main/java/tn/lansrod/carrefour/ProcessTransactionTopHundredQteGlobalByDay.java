@@ -27,7 +27,6 @@ public class ProcessTransactionTopHundredQteGlobalByDay {
 				// ecriture de resultat dans le dossier destination
 				String endWith = "";
 				TransactionWriter.writeGlobal(map, ParamsUtils.dateToProcess, ParamsUtils.outputDirectory, endWith);
-				
 				Date end = new Date();
 		    	System.out.println("End processing at: " + end);
 			}

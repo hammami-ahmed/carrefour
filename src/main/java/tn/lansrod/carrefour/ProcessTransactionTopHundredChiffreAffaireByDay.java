@@ -20,7 +20,7 @@ public class ProcessTransactionTopHundredChiffreAffaireByDay {
 		else {
 			Date start = new Date();
 	    	System.out.println("Start processing at: " + start);
-	    	// preparation des parametres
+	    	// preparation les parametres
 			ParamsUtils.initParams(args);
 			// lire le fichier de transaction et faire u groupe par magasin et par produit
 			Map<String, Map<String, Integer>> map = TransactionReader.read(ParamsUtils.tranctionFilePath, ParamsUtils.delimiter);

@@ -67,9 +67,9 @@ public class TransactionReadTest {
     public void shouldReadGlobal() {
 		Map<String, Integer> products = TransactionReader.readGlobal(transactionFilePath, DELIMITER);
 		assertEquals(products.size(), 5);
-		int count = 4;
+		int size = 4;
 		for (Map.Entry<String, Integer> prod : products.entrySet()) {
-			assertEquals((int)new Integer(count), (int)new Integer(prod.getValue()));
+			assertEquals((int)new Integer(size), (int)new Integer(prod.getValue()));
 		}
 	}
 }

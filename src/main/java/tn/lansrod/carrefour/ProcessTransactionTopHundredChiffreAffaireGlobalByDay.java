@@ -32,7 +32,6 @@ public class ProcessTransactionTopHundredChiffreAffaireGlobalByDay {
 				mergedProduct = Merge(mapCA);
 				// ecriture de resultat dans le dossier destination
 				TransactionWriter.writeCAGlobal(mergedProduct, ParamsUtils.dateToProcess, ParamsUtils.outputDirectory);
-				
 				Runtime.getRuntime().gc();
 				Date end = new Date();
 		    	System.out.println("End processing at: " + end);

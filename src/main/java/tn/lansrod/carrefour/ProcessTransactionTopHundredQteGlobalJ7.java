@@ -14,7 +14,9 @@ import tn.lansrod.carrefour.utils.ParamsJ7Utils;
 public class ProcessTransactionTopHundredQteGlobalJ7 {
 	// fichier de transaction contient presque 1.4 million lignes
 	// 6eme task
+	
 	public static Map<String, Integer> listJ7;
+	
 	public static void main( String[] args ) {
 		// enter la date de transaction en question
 		if(args.length != 4) {

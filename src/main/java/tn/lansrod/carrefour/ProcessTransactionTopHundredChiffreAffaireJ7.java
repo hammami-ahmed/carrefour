@@ -25,16 +25,13 @@ public static void main( String[] args ) {
 	    	System.out.println("Start processing at: " + start);
 			ParamsJ7Utils.initParams(args);
 			listJ7 = new HashMap<String, Map<String,Double>>();
-			
 			for(int i = 1; i <= ParamsJ7Utils.treansactionDateInterval.size(); i++) {
 				// preparer la date en question
 				String date = ParamsJ7Utils.getDateToProcess(i-1);
 				// lire le fichier de transaction et faire u groupe par magasin et par produit
 				Map<String, Map<String, Integer>> stream = TransactionReader.read(ParamsJ7Utils.initPath(i-1), ParamsJ7Utils.delimiter);
-				
 				// convertir la qte en chiffre d'affaire en le mult par le prix de produit dans le fichier reference magasin
 				Map<String, Map<String, Double>> mapCA = TransactionReader.convertReaderWithChiffreAffaire(stream, ParamsJ7Utils.inputDirectory, date, ParamsJ7Utils.delimiter);
-				
 				if(listJ7.size() == 0) {
 					listJ7 = mapCA;
 				}
