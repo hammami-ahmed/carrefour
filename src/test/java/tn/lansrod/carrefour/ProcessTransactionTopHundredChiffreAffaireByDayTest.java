@@ -40,7 +40,8 @@ public class ProcessTransactionTopHundredChiffreAffaireByDayTest {
 		String transactionFilePath = inputPath + "/20190610/transactions_20190610.csv";
 		Map<String, Map<String, Integer>> stream = TransactionReader.read(transactionFilePath, DELIMITER);
 		Map<String, Map<String, Double>> streamCA = TransactionReader.convertReaderWithChiffreAffaire(stream, inputPath, DATE, DELIMITER);
-		TransactionWriter.writeCA(streamCA, DATE, outputPath);
+		String endWith = "";
+		TransactionWriter.writeCA(streamCA, DATE, outputPath, endWith);
     }
 	
 	public static void deleteDirectoryRecursion(Path path) throws IOException {

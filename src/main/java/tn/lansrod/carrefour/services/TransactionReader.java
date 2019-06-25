@@ -51,27 +51,6 @@ public class TransactionReader {
 		}
 	}
 	
-//	public static void mergeTransaction(Map.Entry<String, Map<String, Integer>> map, Map<String, Map<String, Integer>> listJ7) {
-//		String magasin = map.getKey();
-//		Map<String, Integer> products = map.getValue();
-//		if(listJ7.get(magasin) == null){
-//			listJ7.put(magasin, products);
-//    	}
-//    	else {
-//    		for (Map.Entry<String, Integer> entry : products.entrySet()) {
-//    			String productID = entry.getKey();
-//				Integer qte = entry.getValue();
-//				if(listJ7.get(magasin).get(productID) == null) {
-//					listJ7.get(magasin).put(productID, qte);
-//        		}
-//        		else {
-//        			listJ7.get(magasin).put(productID, listJ7.get(magasin).get(productID) + qte);
-//        		}
-//    		}
-//    	}
-//	}
-	
-
 	// lire le fichier reference magasin jointure par produit et multiplier la qte par le
 	// prix de chaque produit
 	public static Map<String, Map<String, Double>> convertReaderWithChiffreAffaire(Map<String, Map<String, Integer>> list, String inputDirectory, String dateToProcess, String delimiter) {
@@ -100,7 +79,6 @@ public class TransactionReader {
 	        		else {
 	        			magasinPrice.get(magasinID).put(productID, (double) Math.round((qte * price) * 100) / 100);
 	        		}
-					
 				}
 			} catch (IOException e1) {
 				e1.printStackTrace();
@@ -145,38 +123,81 @@ public class TransactionReader {
 				}
 	}
 
-//	public static Map<String, Map<String, Integer>> readFromTMP(String tranctionFilePath, String delimiter) {
-//		// stream file
-//				try {
-//					// convert to Stream of Transaction then to Map<String, Map<String, Integer>>
-//					Stream<Product> tr =  Files.lines(Paths.get(tranctionFilePath), Charset.defaultCharset())
-//							.map(line -> {
-//							String[] arr = line.split("\\" + delimiter);
-//			                return new Product(arr[0].replace("\"", ""), Integer.parseInt(arr[1].replace("\"", ""))); });
-//					
-//					Map<String, Map<String, Integer>> list = tr.collect(
-//															   Collectors
-//															   .groupingBy
-//															     (
-//															    	Transaction::getMagasin,
-//															       Collectors.groupingBy
-//															       (
-//															    	Transaction::getProduit,
-//																       Collectors.reducing
-//																       (
-//																    		   0,
-//																    		   Transaction::getQte,
-//													                           Integer::sum
-//																       )
-//															       )
-//															   )
-//														);
-//					
-//					tr = null;
-//					return list;
-//				} catch (IOException e) {
-//					e.printStackTrace();
-//					return null;
-//				}
-//	}
+	public static Map<String, Map<String, Double>> mergeCa(Map<String, Map<String, Double>> mapCA, Map<String, Map<String, Double>> listJ7) {
+		for (Map.Entry<String, Map<String, Double>> magasin : mapCA.entrySet()) {
+			String magasinID = magasin.getKey();
+			Map<String, Double> products = magasin.getValue();
+			// selectionne les top 100 pour reduire le boucle
+			products = products.entrySet().stream()
+			            .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+			            .limit(100)
+			            .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
+			                    (oldValue, newValue) -> oldValue, LinkedHashMap::new));
+			// magasin n'existe pas
+			if(listJ7.get(magasinID) == null){
+				listJ7.put(magasinID, products);
+			}
+			else {
+				for (Map.Entry<String, Double> entry : products.entrySet()) {
+					String productID = entry.getKey();
+					Double qte = entry.getValue();
+					// produit n'existe pas
+					if(listJ7.get(magasinID).get(productID) == null) {
+						listJ7.get(magasinID).put(productID, qte);
+		    		}
+		    		else {
+		    			listJ7.get(magasinID).put(productID, listJ7.get(magasinID).get(productID) + qte);
+		    		}
+				}
+			}
+		}
+		return listJ7;
+	}
+
+	public static Map<String, Integer> mergeProducts(Map<String, Integer> map, Map<String, Integer> listJ7) {
+		for (Map.Entry<String, Integer> entry : map.entrySet()) {
+			String productID = entry.getKey();
+			Integer qte = entry.getValue();
+			// produit n'existe pas
+			if(listJ7.get(productID) == null) {
+				listJ7.put(productID, qte);
+    		}
+    		else {
+    			listJ7.put(productID, listJ7.get(productID) + qte);
+    		}
+		}
+		return listJ7;
+	}
+
+	public static Map<String, Map<String, Integer>> merge(Map<String, Map<String, Integer>> map,
+			Map<String, Map<String, Integer>> listJ7) {
+		for (Map.Entry<String, Map<String, Integer>> magasin : map.entrySet()) {
+			String magasinID = magasin.getKey();
+			Map<String, Integer> products = magasin.getValue();
+			// selectionne les top 100 pour reduire le boucle
+			products = products.entrySet().stream()
+			            .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+			            .limit(100)
+			            .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
+			                    (oldValue, newValue) -> oldValue, LinkedHashMap::new));
+			// magasin n'existe pas
+			if(listJ7.get(magasinID) == null){
+				listJ7.put(magasinID, products);
+			}
+			else {
+				for (Map.Entry<String, Integer> entry : products.entrySet()) {
+					String productID = entry.getKey();
+					Integer qte = entry.getValue();
+					// produit n'existe pas
+					if(listJ7.get(magasinID).get(productID) == null) {
+						listJ7.get(magasinID).put(productID, qte);
+		    		}
+		    		else {
+		    			listJ7.get(magasinID).put(productID, listJ7.get(magasinID).get(productID) + qte);
+		    		}
+				}
+			}
+		}
+		return listJ7;
+	}
 }

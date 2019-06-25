@@ -12,8 +12,7 @@ public class GenerateCarrefourData {
 	public static final int MINTRANSACTIONLINE = 100000;
 	// génération des données de 1200 magasin carrefour
 	// chaque magasin contient 20000 produits
-	// et un fichier de transaction contenant 3 million lignes par jour
-	// taille de fichier de transaction 250Mo
+	// et un fichier de transaction contenant environ 1.4 million lignes par jour
     public static void main( String[] args ) {
     	
     	if(args.length != 4) {

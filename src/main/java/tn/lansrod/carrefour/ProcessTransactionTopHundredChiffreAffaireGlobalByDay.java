@@ -9,11 +9,8 @@ import tn.lansrod.carrefour.services.TransactionWriter;
 import tn.lansrod.carrefour.utils.ParamsUtils;
 
 public class ProcessTransactionTopHundredChiffreAffaireGlobalByDay {
-		// fichier de transaction contient presque 3 million lignes
-		// 4eme pt
-		// 2 min 19 s
-	
-		// 1.199.669 lignes de transaction 36 sec
+		// fichier de transaction contient presque 1.4 million lignes
+		// 4eme Task
 		public static void main( String[] args ) {
 			// enter la date de transaction en question
 			if(args.length != 4) {
