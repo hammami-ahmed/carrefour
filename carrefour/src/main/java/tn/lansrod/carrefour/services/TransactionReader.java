@@ -49,28 +49,7 @@ public class TransactionReader {
 			e.printStackTrace();
 			return null;
 		}
-	}
-	
-//	public static void mergeTransaction(Map.Entry<String, Map<String, Integer>> map, Map<String, Map<String, Integer>> listJ7) {
-//		String magasin = map.getKey();
-//		Map<String, Integer> products = map.getValue();
-//		if(listJ7.get(magasin) == null){
-//			listJ7.put(magasin, products);
-//    	}
-//    	else {
-//    		for (Map.Entry<String, Integer> entry : products.entrySet()) {
-//    			String productID = entry.getKey();
-//				Integer qte = entry.getValue();
-//				if(listJ7.get(magasin).get(productID) == null) {
-//					listJ7.get(magasin).put(productID, qte);
-//        		}
-//        		else {
-//        			listJ7.get(magasin).put(productID, listJ7.get(magasin).get(productID) + qte);
-//        		}
-//    		}
-//    	}
-//	}
-	
+	}	
 
 	// lire le fichier reference magasin jointure par produit et multiplier la qte par le
 	// prix de chaque produit
@@ -144,39 +123,4 @@ public class TransactionReader {
 					return null;
 				}
 	}
-
-//	public static Map<String, Map<String, Integer>> readFromTMP(String tranctionFilePath, String delimiter) {
-//		// stream file
-//				try {
-//					// convert to Stream of Transaction then to Map<String, Map<String, Integer>>
-//					Stream<Product> tr =  Files.lines(Paths.get(tranctionFilePath), Charset.defaultCharset())
-//							.map(line -> {
-//							String[] arr = line.split("\\" + delimiter);
-//			                return new Product(arr[0].replace("\"", ""), Integer.parseInt(arr[1].replace("\"", ""))); });
-//					
-//					Map<String, Map<String, Integer>> list = tr.collect(
-//															   Collectors
-//															   .groupingBy
-//															     (
-//															    	Transaction::getMagasin,
-//															       Collectors.groupingBy
-//															       (
-//															    	Transaction::getProduit,
-//																       Collectors.reducing
-//																       (
-//																    		   0,
-//																    		   Transaction::getQte,
-//													                           Integer::sum
-//																       )
-//															       )
-//															   )
-//														);
-//					
-//					tr = null;
-//					return list;
-//				} catch (IOException e) {
-//					e.printStackTrace();
-//					return null;
-//				}
-//	}
 }

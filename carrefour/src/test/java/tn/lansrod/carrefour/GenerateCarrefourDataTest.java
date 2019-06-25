@@ -68,5 +68,4 @@ public class GenerateCarrefourDataTest {
 		}
 		assertTrue("Error, transaction file lines is too low",  MINTRANSACTIONLINE  <= countTransactionLines);
 	}
-	
 }
