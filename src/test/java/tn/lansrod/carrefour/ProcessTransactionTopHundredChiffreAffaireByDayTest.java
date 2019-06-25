@@ -6,12 +6,16 @@ import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
+import java.nio.file.LinkOption;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,6 +42,30 @@ public class ProcessTransactionTopHundredChiffreAffaireByDayTest {
 		Map<String, Map<String, Double>> streamCA = TransactionReader.convertReaderWithChiffreAffaire(stream, inputPath, DATE, DELIMITER);
 		TransactionWriter.writeCA(streamCA, DATE, outputPath);
     }
+	
+	public static void deleteDirectoryRecursion(Path path) throws IOException {
+		if (Files.isDirectory(path, LinkOption.NOFOLLOW_LINKS)) {
+		    try (DirectoryStream<Path> entries = Files.newDirectoryStream(path)) {
+		      for (Path entry : entries) {
+		        deleteDirectoryRecursion(entry);
+		      }
+		    }
+		  }
+		  Files.delete(path);
+	}
+	
+	@AfterClass
+    public static void after() throws Exception {
+		String path = new File("src/test/resources/output").getAbsolutePath();
+    	String[] files = new File("src/test/resources/output").list();
+    	for(int i = 0; i < files.length; i++) {
+    		try {
+				deleteDirectoryRecursion(Paths.get(path + "/" + files[i]));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 	
 	@Test
     public void shouldContainOneFolder() {

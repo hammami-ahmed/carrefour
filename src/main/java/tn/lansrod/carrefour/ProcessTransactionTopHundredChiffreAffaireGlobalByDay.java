@@ -42,7 +42,7 @@ public class ProcessTransactionTopHundredChiffreAffaireGlobalByDay {
 			}
 		}
 
-		private static Map<String, Double> Merge(Map<String, Map<String, Double>> mapCA) {
+		public static Map<String, Double> Merge(Map<String, Map<String, Double>> mapCA) {
 			Map<String, Double> list = new HashMap<String, Double>();
 			
 			for (Map.Entry<String, Map<String, Double>> magasin : mapCA.entrySet()) {

@@ -6,10 +6,14 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
+import java.nio.file.LinkOption;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Map;
 
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,15 +34,40 @@ public class GenerateCarrefourDataTest {
 	
 	@BeforeClass
     public static void setup() throws Exception {
-		ClassLoader classLoader = new GenerateCarrefourDataTest().getClass().getClassLoader();
-		inputPath = classLoader.getResource("").getPath();
+		File resourcesDirectory = new File("src/test/resources/input");
+		inputPath = resourcesDirectory.getAbsoluteFile().toString();
 		listMagasinIDs = RandomUtils.generateMagasinIDs(NB_STORE);
-		GenerateData.generate(DATE, inputPath, NB_STORE, MAXPRODUCEDBYSTORE, MINTRANSACTIONLINE, listMagasinIDs);
+		GenerateData.generate(DATE, inputPath + "/", NB_STORE, MAXPRODUCEDBYSTORE, MINTRANSACTIONLINE, listMagasinIDs);
     }
+	
+	public static void deleteDirectoryRecursion(Path path) throws IOException {
+		if (Files.isDirectory(path, LinkOption.NOFOLLOW_LINKS)) {
+		    try (DirectoryStream<Path> entries = Files.newDirectoryStream(path)) {
+		      for (Path entry : entries) {
+		        deleteDirectoryRecursion(entry);
+		      }
+		    }
+		  }
+		  Files.delete(path);
+	}
+	
+	@AfterClass
+    public static void after() throws Exception {
+		String path = new File("src/test/resources/input").getAbsolutePath();
+    	String[] files = new File("src/test/resources/input").list();
+    	for(int i = 0; i < files.length; i++) {
+    		try {
+				deleteDirectoryRecursion(Paths.get(path + "/" + files[i]));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 	
 	@Test
     public void shouldGenerateOneStoreOneTransactionFiles() {
-		int count = new File(inputPath).list().length;
+		String date = DateUtils.getStringDate(DATE);
+		int count = new File(inputPath + "/" + date).list().length;
 		assertEquals(count, 2);
 	}
 	
