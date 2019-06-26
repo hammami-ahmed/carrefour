@@ -1,18 +1,10 @@
 package tn.lansrod.carrefour;
 
-import java.util.Date;
-import java.util.Map;
-
-import tn.lansrod.carrefour.services.TransactionReader;
-import tn.lansrod.carrefour.services.TransactionWriter;
-import tn.lansrod.carrefour.utils.ParamsUtils;
+import tn.lansrod.carrefour.services.StartTask;
 
 public class ProcessTransactionTopHundredChiffreAffaireByDay {
-	// fichier de transaction contient presque 3 million lignes
-	// 3eme pt
-	// 2 min
-	
-	// 1.199.669 lignes de transaction 36 sec
+	// fichier de transaction contient presque 1.4 million lignes
+	// 3eme task
 	public static void main( String[] args ) {
 		// enter la date de transaction en question
 		if(args.length != 4) {
@@ -21,18 +13,7 @@ public class ProcessTransactionTopHundredChiffreAffaireByDay {
 			return;
 		}
 		else {
-			Date start = new Date();
-	    	System.out.println("Start processing at: " + start);
-	    	// preparation des parametres
-			ParamsUtils.initParams(args);
-			// lire le fichier de transaction et faire u groupe par magasin et par produit
-			Map<String, Map<String, Integer>> map = TransactionReader.read(ParamsUtils.tranctionFilePath, ParamsUtils.delimiter);
-			// convertir la qte en chiffre d'affaire en le mult par le prix de produit dans le fichier reference magasin
-			Map<String, Map<String, Double>> mapCA = TransactionReader.convertReaderWithChiffreAffaire(map, ParamsUtils.inputDirectory, ParamsUtils.dateToProcess, ParamsUtils.delimiter);
-			// ecriture de resultat dans le dossier destination
-			TransactionWriter.writeCA(mapCA, ParamsUtils.dateToProcess, ParamsUtils.outputDirectory);
-			Date end = new Date();
-	    	System.out.println("End processing at: " + end);
+			StartTask.taskthree(args);
 		}
 	}
 }
