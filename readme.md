@@ -1,30 +1,30 @@
-Ce projet contien deux parties, une partie pour la génération des données et autre pour faire des traitements sur les données généré.
+Ce projet contient deux parties, une partie pour la génération des données et une autre pour faire des traitements sur les données générées.
 
-#1er partie (génération des données):
+#1ère partie (génération des données):
 
 #package: tn.lansrod.carrefour
 #class : GenerateCarrefourData
 
-Cette class prend comme exemple les paramètres suivants: 10/06/2019 /home/pathto/input 1200 20000 ou:
+Cette classe prend comme exemple les paramètres suivants: 10/06/2019 /home/pathto/input 1200 20000 ou:
 
-10/06/2019 est la date a partir de laquelle vous voulez genéré les données
-/home/pathto/input est le shemin vers le dossier ou vous souhaitez stocké les données générer
+10/06/2019 est la date a partir de laquelle vous voulez genérer les données
+/home/pathto/input est le chemin vers le dossier ou vous souhaitez stocker les données générées
 1200 est le nombre des magasins que vous souhaitez crée
 20000 est le total produit par magasin
 
-Les données final sont ecrite sous /home/pathto/input de la façon suivante:
+Les données finales sont écrites sous /home/pathto/input de la façon suivante:
 
 /home/pathto/input/20190610/ fichiers des ref et transaction etc ...
 
 #2eme partie (traitement des données):
 
-Cette partie est découpé en plusieur sous partie selon le task que vous souhaité exécuter
-chaque class ou chaque task prend comme exemple les paramètres suivants: 10/06/2019 | /home/pathto/input /home/pathto/output
+Cette partie est découpée en plusieurs sous parties selon le task que vous souhaiez exécuter
+chaque classe ou chaque task prend comme exemple les paramètres suivants: 10/06/2019 | /home/pathto/input /home/pathto/output
 
-10/06/2019 est la date en question Rq: mème si vous souhaité travailler sur toute une semaine on considère cette date comme date début
+10/06/2019 est la date en question Rq: mème si vous souhaitez travailler sur toute une semaine on considère cette date comme date début
 | est le délimiter des fichiers
-/home/pathto/input est le shemin vers l'emplacement des données 
-/home/pathto/output est le shemin ou vous souhaite ecrire votre resultat
+/home/pathto/input est le chemin vers l'emplacement des données 
+/home/pathto/output est le chemin ou vous souhaitez ecrire votre resultat
 
 #package: tn.lansrod.carrefour
 #Task 1 class : ProcessTransactionTopHundredQteByDay
@@ -37,6 +37,6 @@ chaque class ou chaque task prend comme exemple les paramètres suivants: 10/06/
 
 #StartTasksSequentially: une class qui lance tous les tasks sequentiellement
 
-Les données final sont écrite sous /home/pathto/output de la façon suivante
+Les données finales sont écrites sous /home/pathto/output de la façon suivante
 
 /home/pathto/output/Task number/20190610/ fichiers des top_vent ...
