@@ -1,4 +1,9 @@
-Ce projet contient deux parties, une partie pour la génération des données et une autre pour faire des traitements sur les données générées.
+#Run: 
+
+mvn clean compile assembly:single
+java -Xmx512m -cp carrefour-0.0.1-jar-with-dependencies.jar tn.lansrod.carrefour.classQueVousSouhaitezExecuter "Date" "Delimiter" "inputPath" "outputPath"
+
+- Ce projet contient deux parties, une partie pour la génération des données et une autre pour faire des traitements sur les données générées.
 
 #1ère partie (génération des données):
 
